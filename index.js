@@ -188,8 +188,10 @@ function handlePressMidi(e) {
           midiVelocityNormal
       ]);
       // LOGGING
-      let logText = ""+(midiPitch+midiPitchTranspose);
-      appendToEventLog("note-on", logText);
+      let midiNumber = midiPitch+midiPitchTranspose
+      let midiNoteName = midiNumberToName(midiNumber)
+      let logText = ""+midiNumber+" "+midiNoteName
+      appendToEventLog("note_on ", logText);
     }
   }
 }
@@ -208,12 +210,33 @@ function handleReleaseMidi(e) {
           midiPitch + midiPitchTranspose,
           0
       ]);
-
       // LOGGING
-      let logText = ""+(midiPitch+midiPitchTranspose);
-      appendToEventLog("note-off", logText);
+      let midiNumber = midiPitch+midiPitchTranspose
+      let midiNoteName = midiNumberToName(midiNumber)
+      let logText = ""+midiNumber+" "+midiNoteName
+      appendToEventLog("note_off", logText);
     }
   }
+}
+
+// convert midi numbers to their corresponding note value with 60 => "C4"
+function midiNumberToName(n) {
+  let noteNames = [
+    "C-",
+    "C#",
+    "D-",
+    "D#",
+    "E-",
+    "F-",
+    "F#",
+    "G-",
+    "G#",
+    "A-",
+    "A#",
+    "B-",
+   ]
+  let octaves = Math.floor(n / 12) - 1
+  return noteNames[n%12] + octaves
 }
 
 // after the window is loaded
@@ -251,7 +274,7 @@ window.onload = function() {
         if(midiPitchTranspose > 12) {
           midiPitchTranspose -= 12;
           // LOGGING
-          appendToEventLog("octave-down", "");
+          appendToEventLog("octave--", "");
         }
         break;
 
@@ -260,7 +283,7 @@ window.onload = function() {
         if(midiPitchTranspose < 96) {
           midiPitchTranspose += 12;
           // LOGGING
-          appendToEventLog("octave-up", "");
+          appendToEventLog("octave++", "");
         }
         break;
 
