@@ -189,9 +189,7 @@ function handlePressMidi(e) {
       ]);
       // LOGGING
       let midiNumber = midiPitch+midiPitchTranspose
-      let midiNoteName = midiNumberToName(midiNumber)
-      let logText = ""+midiNumber+" "+midiNoteName
-      appendToEventLog("note_on ", logText);
+      appendToEventLog("note_on ", midiNumberToName(midiNumber))
     }
   }
 }
@@ -212,9 +210,7 @@ function handleReleaseMidi(e) {
       ]);
       // LOGGING
       let midiNumber = midiPitch+midiPitchTranspose
-      let midiNoteName = midiNumberToName(midiNumber)
-      let logText = ""+midiNumber+" "+midiNoteName
-      appendToEventLog("note_off", logText);
+      appendToEventLog("note_off", midiNumberToName(midiNumber))
     }
   }
 }
@@ -260,7 +256,7 @@ window.onload = function() {
     if(e.keyCode == 8 || e.keyCode == 46) {
       turnOffAllNotes(midiOutputPort);
       // LOGGING
-      appendToEventLog("panic", "");
+      appendToEventLog("panic   ", "");
       return;
     }
 
@@ -292,7 +288,7 @@ window.onload = function() {
         if(midiChannel < 15) {
           midiChannel += 1;
           // LOGGING
-          appendToEventLog("channel", ""+(midiChannel+1));
+          appendToEventLog("channel ", ""+(midiChannel+1));
         }
         break;
 
@@ -301,7 +297,7 @@ window.onload = function() {
         if(midiChannel > 0) {
           midiChannel -= 1;
           // LOGGING
-          appendToEventLog("channel", ""+(midiChannel+1));
+          appendToEventLog("channel ", ""+(midiChannel+1));
         }
         break;
 
