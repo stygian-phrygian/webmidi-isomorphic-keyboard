@@ -1,0 +1,33 @@
+body {
+  background-color: black;
+}
+
+.widget {
+  background-color: black;
+  color: #aaaaaa;
+  font-family: monospace;
+  font-weight: 200;
+  font-size: 200%;
+}
+
+#deviceSelectSection {
+  height: 10%;
+}
+
+#eventLogSection {
+}
+
+
+#eventLog {
+  overflow: hidden;
+  color: #ee30ee; /* neon pink kind of */
+  background-color: black;
+  font-family: monospace;
+  font-weight: 300;
+  font-size: 150%;
+}
+
+#deviceSelect {
+  background-color: black;
+}
+
