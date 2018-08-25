@@ -7,12 +7,14 @@ Turn your computer keyboard into a MIDI keyboard.
 * Recently triggered events are displayed in the Event Log.
 
 ## Keybindings
-* press/release letter or number keys => MIDI notes will be triggered.
-* ctrl-left/ctrl-right                => MIDI channel down/up 
-* down/up                             => octave down/up 
-* left/right                          => semitone down/up
-* backspace/delete                    => turn off all midi notes (useful if notes get stuck).
-* page down/up                        => prior/next patch (program change)
+```
+    letter/numbers       => MIDI note on/off
+    down/up              => octave down/up
+    left/right           => semitone down/up
+    ctrl-left/ctrl-right => MIDI channel down/up
+    page down/up         => MIDI program-change prior/next
+    backspace/delete     => turn off all notes (if notes get stuck)
+```
 
 ## Note Layout
 * All the ascii letters and numbers represent pitches.
