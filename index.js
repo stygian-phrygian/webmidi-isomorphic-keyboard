@@ -265,13 +265,14 @@ window.onload = function() {
             return;
         }
 
-        // shift octaves down or up if left or right arrow is pressed respectively
-        // shift midi channels down or up if down or up arrow is pressed respectively
-        // send program changes if page down/up is pressed
+        // octave down/up          => arrow down/up
+        // semitone down/up        => arrow left/righ
+        // midi channel down/up    => ctrl-left or ctrl-right
+        // program changes down/up => page down/up
         switch (e.keyCode) {
 
-            // down (octave decrement)
-            case 40:
+            case 40: // down 
+                // (octave decrement)
                 if (midiPitchTranspose > 12) {
                     midiPitchTranspose -= 12;
                     // LOGGING
@@ -279,8 +280,8 @@ window.onload = function() {
                 }
                 break;
 
-                // up (octave increment)
-            case 38:
+            case 38: // up 
+                // (octave increment)
                 if (midiPitchTranspose < 96) {
                     midiPitchTranspose += 12;
                     // LOGGING
@@ -288,44 +289,44 @@ window.onload = function() {
                 }
                 break;
 
-                // // left (semitone decrement)
-                // case 39:
-                // if (midiChannel < 15) {
-                //     midiChannel += 1;
-                //     // LOGGING
-                //     appendToEventLog("-1 ", "");
-                // }
-                // break;
-
-                // // right (semitone increment)
-                // case 37:
-                // if (midiChannel > 0) {
-                //     midiChannel -= 1;
-                //     // LOGGING
-                //     appendToEventLog("+1 ", "");
-                // }
-                // break;
-
-                // shift-left (midi channel change decrement)
-            case 39:
-                if (midiChannel < 15) {
-                    midiChannel += 1;
-                    // LOGGING
-                    appendToEventLog("channel ", "" + (midiChannel + 1));
+            case 37: // left
+                if (e.ctrlKey) {
+                    // (midi channel decrement)
+                    if (midiChannel > 0) {
+                        midiChannel -= 1;
+                        // LOGGING
+                        appendToEventLog("channel", "" + (midiChannel + 1));
+                    }
+                } else {
+                    // (semitone decrement)
+                    if (midiPitchTranspose > 12) {
+                        midiPitchTranspose -= 1;
+                        // LOGGING
+                        appendToEventLog("-1", "");
+                    }
                 }
                 break;
 
-                // right (midi channel change increment)
-            case 37:
-                if (midiChannel > 0) {
-                    midiChannel -= 1;
-                    // LOGGING
-                    appendToEventLog("channel ", "" + (midiChannel + 1));
+            case 39: // right
+                if (e.ctrlKey) {
+                    // (midi channel increment)
+                    if (midiChannel < 15) {
+                        midiChannel += 1;
+                        // LOGGING
+                        appendToEventLog("channel", "" + (midiChannel + 1));
+                    }
+                } else {
+                    // (semitone increment)
+                    if (midiPitchTranspose < 96) {
+                        midiPitchTranspose += 1;
+                        // LOGGING
+                        appendToEventLog("+1", "");
+                    }
                 }
                 break;
 
-                // page up (program change to next patch)
-            case 33:
+
+            case 33: // page up (program change to next patch)
                 if (midiCurrentProgram < 127) {
                     midiCurrentProgram += 1;
                     midiOutputPort.send([midiProgramChangeStatus + midiChannel, midiCurrentProgram]);
@@ -334,8 +335,7 @@ window.onload = function() {
                 }
                 break;
 
-                // page down (program change to prior patch)
-            case 34:
+            case 34: // page down (program change to prior patch)
                 if (midiCurrentProgram > 0) {
                     midiCurrentProgram -= 1;
                     midiOutputPort.send([midiProgramChangeStatus + midiChannel, midiCurrentProgram]);
