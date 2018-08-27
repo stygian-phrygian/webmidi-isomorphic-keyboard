@@ -26,66 +26,7 @@ for (let i = 0; i < 16; ++i) {
     allNoteOff.push(c);
 }
 
-let diminishedScaleLayout = {
-    // col 1
-    "z": 0,
-    "a": 1,
-    "q": 2,
-    "1": 3,
-    // col 2
-    "x": 3,
-    "s": 4,
-    "w": 5,
-    "2": 6,
-    // col 3
-    "c": 6,
-    "d": 7,
-    "e": 8,
-    "3": 9,
-    // col 4
-    "v": 9,
-    "f": 10,
-    "r": 11,
-    "4": 12,
-    // col 5
-    "b": 12,
-    "g": 13,
-    "t": 14,
-    "5": 15,
-    // col 6
-    "n": 15,
-    "h": 16,
-    "y": 17,
-    "6": 18,
-    // col 7
-    "m": 18,
-    "j": 19,
-    "u": 20,
-    "7": 21,
-    // col 8
-    ",": 21,
-    "k": 22,
-    "i": 23,
-    "8": 24,
-    // col 9
-    ".": 24,
-    "l": 25,
-    "o": 26,
-    "9": 27,
-    // col 10
-    "/": 27,
-    ";": 28,
-    "p": 29,
-    "0": 30,
-    // col 11 (somewhat incomplete)
-    "'": 31,
-    "[": 32,
-    "-": 33,
-    // col 12 (somewhat incomplete)
-    "]": 35,
-    "=": 36,
-}
-let key2MidiPitch = diminishedScaleLayout;
+let key2MidiPitch = minorThirdsLayout;
 
 // lovingly modified from here: 
 // https://webaudio.github.io/web-midi-api/#listing-inputs-and-outputs
