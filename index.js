@@ -26,7 +26,7 @@ for (let i = 0; i < 16; ++i) {
     allNoteOff.push(c);
 }
 
-let key2MidiPitch = minorThirdsLayout;
+let key2MidiPitch = majorThirdLayout;
 
 // lovingly modified from here: 
 // https://webaudio.github.io/web-midi-api/#listing-inputs-and-outputs

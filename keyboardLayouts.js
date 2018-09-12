@@ -1,4 +1,4 @@
-let minorThirdsLayout = {
+let minorThirdLayout = {
     // col 1
     "z": 0,
     "a": 1,
@@ -57,6 +57,71 @@ let minorThirdsLayout = {
     "]": 35,
     "=": 36,
 }
+
+// this like minor third layout but:
+// uses major thirds
+// inverts the direction of pitch ascent (so columns *decline* in pitch)
+// which allows for easier chord fingering (we'll see I guess)
+let majorThirdLayout = {
+    // col 1
+    "z": 3,
+    "a": 2,
+    "q": 1,
+    "1": 0,
+    // col 2
+    "x": 7,
+    "s": 6,
+    "w": 5,
+    "2": 4,
+    // col 3
+    "c": 11,
+    "d": 10,
+    "e": 9,
+    "3": 8,
+    // col 4
+    "v": 15,
+    "f": 14,
+    "r": 13,
+    "4": 12,
+    // col 5
+    "b": 19,
+    "g": 18,
+    "t": 17,
+    "5": 16,
+    // col 6
+    "n": 23,
+    "h": 22,
+    "y": 21,
+    "6": 20,
+    // col 7
+    "m": 27,
+    "j": 26,
+    "u": 25,
+    "7": 24,
+    // col 8
+    ",": 31,
+    "k": 30,
+    "i": 29,
+    "8": 28,
+    // col 9
+    ".": 35,
+    "l": 34,
+    "o": 33,
+    "9": 32,
+    // col 10
+    "/": 39,
+    ";": 38,
+    "p": 37,
+    "0": 36,
+    // col 11 (somewhat incomplete)
+    "'": 42,
+    "[": 41,
+    "-": 40,
+    // col 12 (somewhat incomplete)
+    "]": 45,
+    "=": 44,
+}
+
 
 let wholeToneScaleLayout = {
     // col 1
@@ -118,7 +183,7 @@ let wholeToneScaleLayout = {
     "=": 35,
 }
 
-let perfectFourthsLayout = {
+let perfectFourthLayout = {
     // col 1
     "z": 0,
     "a": 5,
@@ -176,4 +241,137 @@ let perfectFourthsLayout = {
     // col 12 (somewhat incomplete)
     "]": 21,
     "=": 26,
+}
+
+let tritoneLayout = {
+    // col 1
+    "z": 0,
+    "a": 6,
+    "q": 12,
+    "1": 18,
+    // col 2
+    "x": 1,
+    "s": 7,
+    "w": 13,
+    "2": 19,
+    // col 3
+    "c": 2,
+    "d": 8,
+    "e": 14,
+    "3": 20,
+    // col 4
+    "v": 3,
+    "f": 9,
+    "r": 15,
+    "4": 21,
+    // col 5
+    "b": 4,
+    "g": 10,
+    "t": 16,
+    "5": 22,
+    // col 6
+    "n": 5,
+    "h": 11,
+    "y": 17,
+    "6": 23,
+    // col 7
+    "m": 6,
+    "j": 12,
+    "u": 18,
+    "7": 24,
+    // col 8
+    ",": 7,
+    "k": 13,
+    "i": 19,
+    "8": 25,
+    // col 9
+    ".": 8,
+    "l": 14,
+    "o": 20,
+    "9": 26,
+    // col 10
+    "/": 9,
+    ";": 15,
+    "p": 21,
+    "0": 27,
+    // col 11 (somewhat incomplete)
+    "'": 16,
+    "[": 22,
+    "-": 28,
+    // col 12 (somewhat incomplete)
+    "]": 23,
+    "=": 29,
+}
+
+
+// major scale in 2 octaves
+// terminology:
+// row 1 = zxcvbn
+// row 2 = asdfgh
+// row 3 = qwerty
+// row 4 = 123456
+//
+// row 1 is major scale ascending
+// row 3 is major scale ascending (octave up)
+// row 2,4 are rows 1,3 but +1 semitone respectively
+// this allows us 2 octaves, but chromatic notes if needed
+// it's kinda weird
+let chromaticDiatonicLayout = {
+    // col 1, C
+    "z": 0,
+    "a": 1,
+    "q": 12,
+    "1": 13,
+    // col 2, D
+    "x": 2,
+    "s": 3,
+    "w": 14,
+    "2": 15,
+    // col 3, E
+    "c": 4,
+    "d": 5,
+    "e": 16,
+    "3": 17,
+    // col 4, F
+    "v": 5,
+    "f": 6,
+    "r": 17,
+    "4": 18,
+    // col 5, G
+    "b": 7,
+    "g": 8,
+    "t": 19,
+    "5": 20,
+    // col 6, A
+    "n": 9,
+    "h": 10,
+    "y": 21,
+    "6": 22,
+    // col 7, B
+    "m": 11,
+    "j": 12,
+    "u": 23,
+    "7": 24,
+    // col 8, C
+    ",": 12,
+    "k": 13,
+    "i": 24,
+    "8": 25,
+    // col 9, D
+    ".": 14,
+    "l": 15,
+    "o": 26,
+    "9": 27,
+    // col 10, E
+    "/": 16,
+    ";": 17,
+    "p": 28,
+    "0": 29,
+    // col 11 (somewhat incomplete)
+    "'": 18,
+    "[": 29,
+    "-": 30,
+    // col 12 (somewhat incomplete)
+    "]": 31,
+    "=": 32,
 }
