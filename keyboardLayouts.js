@@ -122,7 +122,6 @@ let majorThirdLayout = {
     "=": 44,
 }
 
-
 let wholeToneScaleLayout = {
     // col 1
     "z": 0,
@@ -181,6 +180,67 @@ let wholeToneScaleLayout = {
     // col 12 (somewhat incomplete)
     "]": 34,
     "=": 35,
+}
+
+// major seconds (whole tone scale) horizontally & perfect fourths vertically
+let wholeToneScaleLayoutVersion2 = {
+    // col 1
+    "z": 0,
+    "a": 5,
+    "q": 10,
+    "1": 15,
+    // col 2
+    "x": 2,
+    "s": 7,
+    "w": 12,
+    "2": 17,
+    // col 3
+    "c": 4,
+    "d": 9,
+    "e": 14,
+    "3": 19,
+    // col 4
+    "v": 6,
+    "f": 11,
+    "r": 16,
+    "4": 21,
+    // col 5
+    "b": 8,
+    "g": 13,
+    "t": 18,
+    "5": 23,
+    // col 6
+    "n": 10,
+    "h": 15,
+    "y": 20,
+    "6": 25,
+    // col 7
+    "m": 12,
+    "j": 17,
+    "u": 22,
+    "7": 27,
+    // col 8
+    ",": 14,
+    "k": 19,
+    "i": 24,
+    "8": 29,
+    // col 9
+    ".": 16,
+    "l": 21,
+    "o": 26,
+    "9": 31,
+    // col 10
+    "/": 18,
+    ";": 23,
+    "p": 28,
+    "0": 33,
+    // col 11 (somewhat incomplete)
+    "'": 25,
+    "[": 30,
+    "-": 35,
+    // col 12 (somewhat incomplete)
+    "]": 32,
+    "=": 37,
 }
 
 let perfectFourthLayout = {
