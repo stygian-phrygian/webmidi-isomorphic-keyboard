@@ -1,8 +1,18 @@
 // elements
-let deviceSelectElement = document.getElementById("deviceSelect");
 let eventLogElement = document.getElementById("eventLog");
 let eventLogList = []; // model for the log element
 eventLogList.length = eventLogElement.rows; // initialize model
+let deviceSelectElement = document.getElementById("deviceSelect");
+let keyboardLayoutSelectElement = document.getElementById("keyboardLayoutSelect");
+let keyboardLayoutsList = { // these layouts are in "keyboardLayoutsList.js"
+    "wholeToneScaleLayoutVersion2": wholeToneScaleLayoutVersion2,
+    "wholeToneScaleLayout": wholeToneScaleLayout,
+    "tritoneLayout": tritoneLayout,
+    "minorThirdLayout": minorThirdLayout,
+    "majorThirdLayout": majorThirdLayout,
+    "perfectFourthLayout": perfectFourthLayout,
+    "chromaticDiatonicLayout": chromaticDiatonicLayout,
+}
 
 // midi
 let midiOutputPort;
@@ -25,10 +35,139 @@ for (let i = 0; i < 16; ++i) {
     }
     allNoteOff.push(c);
 }
+// which layout we're currently in
+// (it's initialized to whatever the first available layout is)
+let key2MidiPitch;
 
-let key2MidiPitch = majorThirdLayout;
 
-// lovingly modified from here: 
+// after the window is loaded
+// // basically the main() function
+window.onload = function() {
+
+    // check if midi available
+    if (navigator.requestMIDIAccess) {
+        // request midi access (on success)
+        navigator.requestMIDIAccess().then(midiAccessSuccess, midiAccessFailure);
+    }
+
+    // attach callback to device select
+    deviceSelectElement.addEventListener("change", handleDeviceSelectOnChange);
+
+    // populate keyboard layout select
+    populateKeyboardLayoutSelect()
+    // select the first option in the available layouts
+    keyboardLayoutSelectElement.selectedIndex = "0";
+    // set our key to midi-note hashmap to the selected option
+    key2MidiPitch = keyboardLayoutsList[keyboardLayoutSelectElement.value]
+
+    // attach callback to keyboard layout select
+    keyboardLayoutSelectElement.addEventListener("change", handleKeyboardLayoutSelectOnChange);
+
+    // connect key presses to midi note on events
+    window.addEventListener("keydown", function(e) {
+        // trigger midi events if the key is in the layout
+        handlePressMidi(e);
+
+        // turn off all notes if backspace/delete is pressed
+        if (e.keyCode == 8 || e.keyCode == 46) {
+            turnOffAllNotes(midiOutputPort);
+            // LOGGING
+            appendToEventLog("panic   ", "");
+            return;
+        }
+
+        // octave down/up          => arrow down/up
+        // semitone down/up        => arrow left/righ
+        // midi channel down/up    => ctrl-left or ctrl-right
+        // program changes down/up => page down/up
+        switch (e.keyCode) {
+
+            case 40: // down 
+                // (octave decrement)
+                if (midiPitchTranspose > 12) {
+                    midiPitchTranspose -= 12;
+                    // LOGGING
+                    appendToEventLog("-12", "");
+                }
+                break;
+
+            case 38: // up 
+                // (octave increment)
+                if (midiPitchTranspose < 96) {
+                    midiPitchTranspose += 12;
+                    // LOGGING
+                    appendToEventLog("+12", "");
+                }
+                break;
+
+            case 37: // left
+                if (e.ctrlKey) {
+                    // (midi channel decrement)
+                    if (midiChannel > 0) {
+                        midiChannel -= 1;
+                        // LOGGING
+                        appendToEventLog("channel", "" + (midiChannel + 1));
+                    }
+                } else {
+                    // (semitone decrement)
+                    if (midiPitchTranspose > 12) {
+                        midiPitchTranspose -= 1;
+                        // LOGGING
+                        appendToEventLog("-1", "");
+                    }
+                }
+                break;
+
+            case 39: // right
+                if (e.ctrlKey) {
+                    // (midi channel increment)
+                    if (midiChannel < 15) {
+                        midiChannel += 1;
+                        // LOGGING
+                        appendToEventLog("channel", "" + (midiChannel + 1));
+                    }
+                } else {
+                    // (semitone increment)
+                    if (midiPitchTranspose < 96) {
+                        midiPitchTranspose += 1;
+                        // LOGGING
+                        appendToEventLog("+1", "");
+                    }
+                }
+                break;
+
+
+            case 33: // page up (program change to next patch)
+                if (midiCurrentProgram < 127) {
+                    midiCurrentProgram += 1;
+                    midiOutputPort.send([midiProgramChangeStatus + midiChannel, midiCurrentProgram]);
+                    // LOGGING
+                    appendToEventLog("program change", "" + (midiCurrentProgram + 1));
+                }
+                break;
+
+            case 34: // page down (program change to prior patch)
+                if (midiCurrentProgram > 0) {
+                    midiCurrentProgram -= 1;
+                    midiOutputPort.send([midiProgramChangeStatus + midiChannel, midiCurrentProgram]);
+                    // LOGGING
+                    appendToEventLog("program change", "" + (midiCurrentProgram + 1));
+                }
+                break;
+        }
+
+    });
+
+    // connect key releases to midi note off events
+    window.addEventListener("keyup", function(e) {
+        handleReleaseMidi(e);
+    });
+}
+
+
+
+
+// lovingly modified from here:
 // https://webaudio.github.io/web-midi-api/#listing-inputs-and-outputs
 function listInputsAndOutputs(midiAccess) {
     for (var entry of midiAccess.inputs) {
@@ -57,6 +196,14 @@ function populateDeviceSelect(midiAccess) {
     }
 }
 
+function populateKeyboardLayoutSelect(midiAccess) {
+    for (var layoutName in keyboardLayoutsList) {
+        let option = document.createElement("option");
+        option.text = layoutName
+        keyboardLayoutSelectElement.add(option);
+    }
+}
+
 // callback to run when a new midi device is selected
 function handleDeviceSelectOnChange(e) {
     let v = deviceSelectElement.value;
@@ -68,6 +215,15 @@ function handleDeviceSelectOnChange(e) {
             return;
         }
     }
+}
+
+// callback to run when a new keyboard layout is selected
+function handleKeyboardLayoutSelectOnChange(e) {
+    let v = keyboardLayoutSelectElement.value;
+    let layout = keyboardLayoutsList[v];
+    //NB. active notes (note_on) will possibly become unreachable for deactivation 
+    //(note off) in a layout change.  If so, just hit the panic button.
+    key2MidiPitch = layout;
 }
 
 
@@ -178,118 +334,4 @@ function midiNumberToName(n) {
     ]
     let octaves = Math.floor(n / 12) - 1
     return noteNames[n % 12] + octaves
-}
-
-// after the window is loaded
-// // basically the main() function
-window.onload = function() {
-
-    // check if midi available
-    if (navigator.requestMIDIAccess) {
-        // request midi access (on success)
-        navigator.requestMIDIAccess().then(midiAccessSuccess, midiAccessFailure);
-    }
-
-    // attach callback to device select
-    deviceSelectElement.addEventListener("change", handleDeviceSelectOnChange);
-
-    // connect key presses to midi note on events
-    window.addEventListener("keydown", function(e) {
-        // trigger midi events if the key is in the layout
-        handlePressMidi(e);
-
-        // turn off all notes if backspace/delete is pressed
-        if (e.keyCode == 8 || e.keyCode == 46) {
-            turnOffAllNotes(midiOutputPort);
-            // LOGGING
-            appendToEventLog("panic   ", "");
-            return;
-        }
-
-        // octave down/up          => arrow down/up
-        // semitone down/up        => arrow left/righ
-        // midi channel down/up    => ctrl-left or ctrl-right
-        // program changes down/up => page down/up
-        switch (e.keyCode) {
-
-            case 40: // down 
-                // (octave decrement)
-                if (midiPitchTranspose > 12) {
-                    midiPitchTranspose -= 12;
-                    // LOGGING
-                    appendToEventLog("-12", "");
-                }
-                break;
-
-            case 38: // up 
-                // (octave increment)
-                if (midiPitchTranspose < 96) {
-                    midiPitchTranspose += 12;
-                    // LOGGING
-                    appendToEventLog("+12", "");
-                }
-                break;
-
-            case 37: // left
-                if (e.ctrlKey) {
-                    // (midi channel decrement)
-                    if (midiChannel > 0) {
-                        midiChannel -= 1;
-                        // LOGGING
-                        appendToEventLog("channel", "" + (midiChannel + 1));
-                    }
-                } else {
-                    // (semitone decrement)
-                    if (midiPitchTranspose > 12) {
-                        midiPitchTranspose -= 1;
-                        // LOGGING
-                        appendToEventLog("-1", "");
-                    }
-                }
-                break;
-
-            case 39: // right
-                if (e.ctrlKey) {
-                    // (midi channel increment)
-                    if (midiChannel < 15) {
-                        midiChannel += 1;
-                        // LOGGING
-                        appendToEventLog("channel", "" + (midiChannel + 1));
-                    }
-                } else {
-                    // (semitone increment)
-                    if (midiPitchTranspose < 96) {
-                        midiPitchTranspose += 1;
-                        // LOGGING
-                        appendToEventLog("+1", "");
-                    }
-                }
-                break;
-
-
-            case 33: // page up (program change to next patch)
-                if (midiCurrentProgram < 127) {
-                    midiCurrentProgram += 1;
-                    midiOutputPort.send([midiProgramChangeStatus + midiChannel, midiCurrentProgram]);
-                    // LOGGING
-                    appendToEventLog("program change", "" + (midiCurrentProgram + 1));
-                }
-                break;
-
-            case 34: // page down (program change to prior patch)
-                if (midiCurrentProgram > 0) {
-                    midiCurrentProgram -= 1;
-                    midiOutputPort.send([midiProgramChangeStatus + midiChannel, midiCurrentProgram]);
-                    // LOGGING
-                    appendToEventLog("program change", "" + (midiCurrentProgram + 1));
-                }
-                break;
-        }
-
-    });
-
-    // connect key releases to midi note off events
-    window.addEventListener("keyup", function(e) {
-        handleReleaseMidi(e);
-    });
 }

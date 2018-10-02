@@ -2,32 +2,33 @@ body {
   background-color: black;
 }
 
+.center {
+  margin: auto;
+  width: 33%;
+}
+
+.text-align-left {
+  text-align: left;
+}
+.text-align-right {
+  text-align: right;
+}
+
 .widget {
   background-color: black;
-  color: #aaaaaa;
+  color: #666666;
   font-family: monospace;
   font-weight: 200;
   font-size: 200%;
+  margin: 1%;
 }
-
-#deviceSelectSection {
-  height: 10%;
-}
-
-#eventLogSection {
-}
-
 
 #eventLog {
   overflow: hidden;
   color: #ee30ee; /* neon pink kind of */
-  background-color: black;
   font-family: monospace;
   font-weight: 300;
   font-size: 150%;
-}
-
-#deviceSelect {
-  background-color: black;
+  resize: none;
 }
 
