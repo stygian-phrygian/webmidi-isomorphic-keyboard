@@ -3,8 +3,19 @@ body {
 }
 
 .center {
+  /*
+  magic which centers the div vertically and horizontally, thanks fam
+  found here:
+  http://www.tipue.com/blog/center-a-div/
+  */
+  position: absolute;
   margin: auto;
-  width: 33%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 33%;   /* width & height specify the div size in the center) */
+  height: 88%;
 }
 
 .text-align-left {
@@ -20,7 +31,12 @@ body {
   font-family: monospace;
   font-weight: 200;
   font-size: 200%;
-  margin: 1%;
+  margin: 2%;
+}
+
+#eventLogTitle {
+  /* give it a little more room from the top */
+  /* margin-top: 11%; */
 }
 
 #eventLog {
