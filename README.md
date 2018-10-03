@@ -12,8 +12,8 @@ Turn your computer keyboard into a MIDI keyboard.
     letter/numbers       => MIDI note on/off
     down/up              => octave down/up
     left/right           => semitone down/up
-    ctrl-left/ctrl-right => MIDI channel down/up
     ctrl-down/ctrl-up    => keyboard layout down/up
+    ctrl-left/ctrl-right => MIDI channel down/up
     page down/up         => MIDI program-change prior/next
     backspace/delete     => turn off all notes (if notes get stuck)
 ```
