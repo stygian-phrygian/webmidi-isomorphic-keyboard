@@ -1,68 +1,86 @@
-let minorThirdLayout = {
+// ANSI layout is assumed (and this won't make sense otherwise).
+// Descriptions of the layouts below use terms like columns and rows.  A column
+// would refer to the collection of keys "zaq1" (column 1) or "xsw2" (column
+// 2).  A row would refer to the collection of keys "zxcvbnm,/" Ascending a
+// column would mean moving from "z" to "a" to "q" (away from your chest) and
+// descending is the inverted direction.  Likewise, ascending a row would mean
+// moving from "z" to "x" to "c" to "v" and descending the inversion as well.
+
+// melodic layout
+// columns ascending in perfect 4ths
+// rows ascending in major 2nds
+//
+// This an oddly useful layout, optimized for melodic playing.  The major
+// scale modes are very easily accessible (as well as chromatic should you
+// desire).  Perfect fifths are a comfortable keypress away.
+let melodicLayout = {
     // col 1
     "z": 0,
-    "a": 1,
-    "q": 2,
-    "1": 3,
+    "a": 5,
+    "q": 10,
+    "1": 15,
     // col 2
-    "x": 3,
-    "s": 4,
-    "w": 5,
-    "2": 6,
+    "x": 2,
+    "s": 7,
+    "w": 12,
+    "2": 17,
     // col 3
-    "c": 6,
-    "d": 7,
-    "e": 8,
-    "3": 9,
+    "c": 4,
+    "d": 9,
+    "e": 14,
+    "3": 19,
     // col 4
-    "v": 9,
-    "f": 10,
-    "r": 11,
-    "4": 12,
+    "v": 6,
+    "f": 11,
+    "r": 16,
+    "4": 21,
     // col 5
-    "b": 12,
+    "b": 8,
     "g": 13,
-    "t": 14,
-    "5": 15,
+    "t": 18,
+    "5": 23,
     // col 6
-    "n": 15,
-    "h": 16,
-    "y": 17,
-    "6": 18,
+    "n": 10,
+    "h": 15,
+    "y": 20,
+    "6": 25,
     // col 7
-    "m": 18,
-    "j": 19,
-    "u": 20,
-    "7": 21,
+    "m": 12,
+    "j": 17,
+    "u": 22,
+    "7": 27,
     // col 8
-    ",": 21,
-    "k": 22,
-    "i": 23,
-    "8": 24,
+    ",": 14,
+    "k": 19,
+    "i": 24,
+    "8": 29,
     // col 9
-    ".": 24,
-    "l": 25,
+    ".": 16,
+    "l": 21,
     "o": 26,
-    "9": 27,
+    "9": 31,
     // col 10
-    "/": 27,
-    ";": 28,
-    "p": 29,
-    "0": 30,
+    "/": 18,
+    ";": 23,
+    "p": 28,
+    "0": 33,
     // col 11 (somewhat incomplete)
-    "'": 31,
-    "[": 32,
-    "-": 33,
+    "'": 25,
+    "[": 30,
+    "-": 35,
     // col 12 (somewhat incomplete)
-    "]": 35,
-    "=": 36,
+    "]": 32,
+    "=": 37,
 }
 
-// this like minor third layout but:
-// uses major thirds
-// inverts the direction of pitch ascent (so columns *decline* in pitch)
-// which allows for easier chord fingering (we'll see I guess)
-let majorThirdLayout = {
+// major 3rds inverted layout
+// columns descending in minor 2nds
+// rows ascending  in major 3rds
+//
+// This layout has an odd descending note layout in its columns but is useful
+// for harmony.  The right hand has convenient access to 7th chords.  There are
+// no redundant notes (maximizing voicing options).
+let major3rdsInvertedLayout = {
     // col 1
     "z": 3,
     "a": 2,
@@ -122,6 +140,75 @@ let majorThirdLayout = {
     "=": 44,
 }
 
+// minor 3rds layout
+// columns ascending in minor 2nds
+// rows    ascending in minor 3rds
+let minor3rdsLayout = {
+    // col 1
+    "z": 0,
+    "a": 1,
+    "q": 2,
+    "1": 3,
+    // col 2
+    "x": 3,
+    "s": 4,
+    "w": 5,
+    "2": 6,
+    // col 3
+    "c": 6,
+    "d": 7,
+    "e": 8,
+    "3": 9,
+    // col 4
+    "v": 9,
+    "f": 10,
+    "r": 11,
+    "4": 12,
+    // col 5
+    "b": 12,
+    "g": 13,
+    "t": 14,
+    "5": 15,
+    // col 6
+    "n": 15,
+    "h": 16,
+    "y": 17,
+    "6": 18,
+    // col 7
+    "m": 18,
+    "j": 19,
+    "u": 20,
+    "7": 21,
+    // col 8
+    ",": 21,
+    "k": 22,
+    "i": 23,
+    "8": 24,
+    // col 9
+    ".": 24,
+    "l": 25,
+    "o": 26,
+    "9": 27,
+    // col 10
+    "/": 27,
+    ";": 28,
+    "p": 29,
+    "0": 30,
+    // col 11 (somewhat incomplete)
+    "'": 31,
+    "[": 32,
+    "-": 33,
+    // col 12 (somewhat incomplete)
+    "]": 35,
+    "=": 36,
+}
+
+// whole tone scale layout
+// columns ascending irregularly (z a q 1 => 0, 1, 12, 13) for chromatic notes
+// rows ascending in major 2nds
+//
+// This has an irregular column ascension to account for the lack of chromatic
+// coverage present in the whole tone scale.
 let wholeToneScaleLayout = {
     // col 1
     "z": 0,
@@ -182,68 +269,12 @@ let wholeToneScaleLayout = {
     "=": 35,
 }
 
-// major seconds (whole tone scale) horizontally & perfect fourths vertically
-let wholeToneScaleLayoutVersion2 = {
-    // col 1
-    "z": 0,
-    "a": 5,
-    "q": 10,
-    "1": 15,
-    // col 2
-    "x": 2,
-    "s": 7,
-    "w": 12,
-    "2": 17,
-    // col 3
-    "c": 4,
-    "d": 9,
-    "e": 14,
-    "3": 19,
-    // col 4
-    "v": 6,
-    "f": 11,
-    "r": 16,
-    "4": 21,
-    // col 5
-    "b": 8,
-    "g": 13,
-    "t": 18,
-    "5": 23,
-    // col 6
-    "n": 10,
-    "h": 15,
-    "y": 20,
-    "6": 25,
-    // col 7
-    "m": 12,
-    "j": 17,
-    "u": 22,
-    "7": 27,
-    // col 8
-    ",": 14,
-    "k": 19,
-    "i": 24,
-    "8": 29,
-    // col 9
-    ".": 16,
-    "l": 21,
-    "o": 26,
-    "9": 31,
-    // col 10
-    "/": 18,
-    ";": 23,
-    "p": 28,
-    "0": 33,
-    // col 11 (somewhat incomplete)
-    "'": 25,
-    "[": 30,
-    "-": 35,
-    // col 12 (somewhat incomplete)
-    "]": 32,
-    "=": 37,
-}
-
-let perfectFourthLayout = {
+// perfect 4ths layout
+// columns ascending in perfect 4ths
+// rows ascending in minor 2nds
+//
+// This is basically a bass guitar layout.
+let perfect4thsLayout = {
     // col 1
     "z": 0,
     "a": 5,
@@ -303,6 +334,12 @@ let perfectFourthLayout = {
     "=": 26,
 }
 
+// tritone layout
+// columns ascending in tritones
+// rows ascending in minor 2nds
+//
+// This layout is convenient for its easy access to perfect 5ths as well as
+// being similar to the layout of a guitar.
 let tritoneLayout = {
     // col 1
     "z": 0,
@@ -361,77 +398,4 @@ let tritoneLayout = {
     // col 12 (somewhat incomplete)
     "]": 23,
     "=": 29,
-}
-
-
-// major scale in 2 octaves
-// terminology:
-// row 1 = zxcvbn
-// row 2 = asdfgh
-// row 3 = qwerty
-// row 4 = 123456
-//
-// row 1 is major scale ascending
-// row 3 is major scale ascending (octave up)
-// row 2,4 are rows 1,3 but +1 semitone respectively
-// this allows us 2 octaves, but chromatic notes if needed
-// it's kinda weird
-let chromaticDiatonicLayout = {
-    // col 1, C
-    "z": 0,
-    "a": 1,
-    "q": 12,
-    "1": 13,
-    // col 2, D
-    "x": 2,
-    "s": 3,
-    "w": 14,
-    "2": 15,
-    // col 3, E
-    "c": 4,
-    "d": 5,
-    "e": 16,
-    "3": 17,
-    // col 4, F
-    "v": 5,
-    "f": 6,
-    "r": 17,
-    "4": 18,
-    // col 5, G
-    "b": 7,
-    "g": 8,
-    "t": 19,
-    "5": 20,
-    // col 6, A
-    "n": 9,
-    "h": 10,
-    "y": 21,
-    "6": 22,
-    // col 7, B
-    "m": 11,
-    "j": 12,
-    "u": 23,
-    "7": 24,
-    // col 8, C
-    ",": 12,
-    "k": 13,
-    "i": 24,
-    "8": 25,
-    // col 9, D
-    ".": 14,
-    "l": 15,
-    "o": 26,
-    "9": 27,
-    // col 10, E
-    "/": 16,
-    ";": 17,
-    "p": 28,
-    "0": 29,
-    // col 11 (somewhat incomplete)
-    "'": 18,
-    "[": 29,
-    "-": 30,
-    // col 12 (somewhat incomplete)
-    "]": 31,
-    "=": 32,
 }
