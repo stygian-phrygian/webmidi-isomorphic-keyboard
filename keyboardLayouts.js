@@ -73,6 +73,70 @@ let melodicLayout = {
     "=": 37,
 }
 
+// melodic layout (vers 2)
+// columns ascending in minor 3rds
+// rows ascending in major 2nds
+//
+let melodicLayout2 = {
+    // col 1
+    "z": 0,
+    "a": 3,
+    "q": 6,
+    "1": 9,
+    // col 2
+    "x": 2,
+    "s": 5,
+    "w": 8,
+    "2": 11,
+    // col 3
+    "c": 4,
+    "d": 7,
+    "e": 10,
+    "3": 13,
+    // col 4
+    "v": 6,
+    "f": 9,
+    "r": 12,
+    "4": 15,
+    // col 5
+    "b": 8,
+    "g": 11,
+    "t": 14,
+    "5": 17,
+    // col 6
+    "n": 10,
+    "h": 13,
+    "y": 16,
+    "6": 19,
+    // col 7
+    "m": 12,
+    "j": 15,
+    "u": 18,
+    "7": 21,
+    // col 8
+    ",": 14,
+    "k": 17,
+    "i": 20,
+    "8": 23,
+    // col 9
+    ".": 16,
+    "l": 19,
+    "o": 22,
+    "9": 25,
+    // col 10
+    "/": 18,
+    ";": 21,
+    "p": 24,
+    "0": 27,
+    // col 11 (somewhat incomplete)
+    "'": 23,
+    "[": 26,
+    "-": 29,
+    // col 12 (somewhat incomplete)
+    "]": 28,
+    "=": 31,
+}
+
 // major 3rds inverted layout
 // columns descending in minor 2nds
 // rows ascending  in major 3rds
@@ -212,61 +276,61 @@ let minor3rdsLayout = {
 let wholeToneScaleLayout = {
     // col 1
     "z": 0,
-    "a": 1,
+    "a": -1,
     "q": 12,
-    "1": 13,
+    "1": 11,
     // col 2
     "x": 2,
-    "s": 3,
+    "s": 1,
     "w": 14,
-    "2": 15,
+    "2": 13,
     // col 3
     "c": 4,
-    "d": 5,
+    "d": 3,
     "e": 16,
-    "3": 17,
+    "3": 15,
     // col 4
     "v": 6,
-    "f": 7,
+    "f": 5,
     "r": 18,
-    "4": 19,
+    "4": 17,
     // col 5
     "b": 8,
-    "g": 9,
+    "g": 7,
     "t": 20,
-    "5": 21,
+    "5": 19,
     // col 6
     "n": 10,
-    "h": 11,
+    "h": 9,
     "y": 22,
-    "6": 23,
+    "6": 21,
     // col 7
     "m": 12,
-    "j": 13,
+    "j": 11,
     "u": 24,
-    "7": 25,
+    "7": 23,
     // col 8
     ",": 14,
-    "k": 15,
+    "k": 13,
     "i": 26,
-    "8": 27,
+    "8": 25,
     // col 9
     ".": 16,
-    "l": 17,
+    "l": 15,
     "o": 28,
-    "9": 29,
+    "9": 27,
     // col 10
     "/": 18,
-    ";": 19,
+    ";": 17,
     "p": 30,
-    "0": 31,
+    "0": 29,
     // col 11 (somewhat incomplete)
-    "'": 21,
+    "'": 19,
     "[": 32,
-    "-": 33,
+    "-": 31,
     // col 12 (somewhat incomplete)
     "]": 34,
-    "=": 35,
+    "=": 33,
 }
 
 // perfect 4ths layout
