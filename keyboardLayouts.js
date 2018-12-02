@@ -333,6 +333,70 @@ let wholeToneScaleLayout = {
     "=": 33,
 }
 
+// diatonic scale layout
+// columns ascending irregularly (z a q 1 => 0, 1, 12, 13) for chromatic notes
+// rows ascending irregularly in diatonic notes (z,q: white notes & a,1: accidentals)
+let diatonicLayout = {
+    // col 1
+    "z": 0,
+    // "a": -1,
+    "q": 12,
+    // "1": 11,
+    // col 2
+    "x": 2,
+    "s": 1,
+    "w": 14,
+    "2": 13,
+    // col 3
+    "c": 4,
+    "d": 3,
+    "e": 16,
+    "3": 15,
+    // col 4
+    "v": 5,
+    // "f": 5,
+    "r": 17,
+    // "4": 17,
+    // col 5
+    "b": 7,
+    "g": 6,
+    "t": 19,
+    "5": 18,
+    // col 6
+    "n": 9,
+    "h": 8,
+    "y": 21,
+    "6": 20,
+    // col 7
+    "m": 11,
+    "j": 10,
+    "u": 23,
+    "7": 22,
+    // col 8
+    ",": 12,
+    // "k": 13,
+    "i": 24,
+    // "8": 25,
+    // col 9
+    ".": 14,
+    "l": 13,
+    "o": 26,
+    "9": 25,
+    // col 10
+    "/": 16,
+    ";": 15,
+    "p": 28,
+    "0": 27,
+    // col 11 (somewhat incomplete)
+    // "'": 19,
+    "[": 29,
+    // "-": 28,
+    // col 12 (somewhat incomplete)
+    "]": 31,
+    "=": 30,
+}
+
+
 // perfect 4ths layout
 // columns ascending in perfect 4ths
 // rows ascending in minor 2nds

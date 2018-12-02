@@ -5,12 +5,14 @@ eventLogList.length = eventLogElement.rows; // initialize model
 let deviceSelectElement = document.getElementById("deviceSelect");
 let keyboardLayoutSelectElement = document.getElementById("keyboardLayoutSelect");
 let keyboardLayoutsList = { // these layouts are in "keyboardLayoutsList.js"
-    "melodicLayout": melodicLayout,
     "major3rdsInvertedLayout": major3rdsInvertedLayout,
+    "melodicLayout": melodicLayout,
+    "melodicLayout2": melodicLayout2,
     "tritoneLayout": tritoneLayout,
     "perfect4thsLayout": perfect4thsLayout,
     "wholeToneScaleLayout": wholeToneScaleLayout,
     "minor3rdsLayout": minor3rdsLayout,
+    "diatonicLayout": diatonicLayout,
 }
 
 // midi
