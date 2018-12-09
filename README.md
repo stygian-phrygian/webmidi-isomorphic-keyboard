@@ -1,4 +1,4 @@
-# WebMIDI Isomorphic Keyboard
+# WebMIDI Keyboard
 Turn your computer keyboard into a MIDI keyboard.
 
 ## Usage
