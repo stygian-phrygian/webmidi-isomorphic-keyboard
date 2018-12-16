@@ -107,6 +107,15 @@ function handleKeyDown(e) {
                 }
                 key2MidiPitch = keyboardLayoutsList[keyboardLayoutSelectElement.value];
                 appendToEventLog("layout", "down");
+            } else if (e.altKey) {
+                // midi device down
+                // edge case: length <= selectedIndex will crash everything
+                if (deviceSelectElement.selectedIndex < (deviceSelectElement.length - 1)) {
+                    deviceSelectElement.selectedIndex++;
+                } else {
+                    deviceSelectElement.selectedIndex = 0;
+                }
+                appendToEventLog("device", "down");
             } else {
                 // (octave decrement)
                 if (midiPitchTranspose > 12) {
@@ -127,6 +136,14 @@ function handleKeyDown(e) {
                 }
                 key2MidiPitch = keyboardLayoutsList[keyboardLayoutSelectElement.value];
                 appendToEventLog("layout", "up");
+            } else if (e.altKey) {
+                // midi device up
+                // selectedIndex == -1 means no selection
+                deviceSelectElement.selectedIndex--;
+                if (deviceSelectElement.selectedIndex < 0) {
+                    deviceSelectElement.selectedIndex = (deviceSelectElement.length - 1);
+                }
+                appendToEventLog("device", "up");
             } else {
                 // (octave increment)
                 if (midiPitchTranspose < 96) {
