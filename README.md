@@ -21,3 +21,6 @@ Turn your computer keyboard into a MIDI keyboard.
 ## Screenshot
 ![screenshot](screenshot.png)
 
+
+## Nota Bene
+This project has been thoroughly improved/updated/usurped by [this](https://github.com/stygian-phrygian/jank-keyboard)
